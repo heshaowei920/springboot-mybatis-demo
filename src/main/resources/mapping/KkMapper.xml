@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.winter.mapper.KkMapper">
+  <resultMap id="BaseResultMap" type="com.winter.model.Kk">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="def" jdbcType="VARCHAR" property="def" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, def
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_kk
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_kk
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.winter.model.Kk">
+    insert into tb_kk (id, def)
+    values (#{id,jdbcType=INTEGER}, #{def,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.winter.model.Kk">
+    insert into tb_kk
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="def != null">
+        def,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="def != null">
+        #{def,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.winter.model.Kk">
+    update tb_kk
+    <set>
+      <if test="def != null">
+        def = #{def,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.winter.model.Kk">
+    update tb_kk
+    set def = #{def,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.winter.model.Kk">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="def" jdbcType="VARCHAR" property="def" />
+  </resultMap>
+  <insert id="insert" parameterType="com.winter.model.Kk">
+    insert into tb_kk (id, def)
+    values (#{id,jdbcType=INTEGER}, #{def,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.winter.model.Kk">
+    insert into tb_kk
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="def != null">
+        def,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="def != null">
+        #{def,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
