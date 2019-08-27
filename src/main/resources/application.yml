@@ -23,6 +23,22 @@ spring:
         testOnReturn: false
         poolPreparedStatements: true
         maxOpenPreparedStatements: 20
+    data:
+      mongodb:
+        uri: mongodb://localhost:27017/mydb
+
+    redis:
+      database: 0
+      host: 127.0.0.1
+      port: 6379
+      password:
+      pool:
+        max-active: 200
+        max-wait: -1
+        max-idle: 10
+        min-idle: 0
+      timeout: 100
+
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.winter.model
@@ -33,3 +49,4 @@ pagehelper:
     reasonable: true
     supportMethodsArguments: true
     params: count=countSql
+
