@@ -3,7 +3,7 @@ package com.winter.service.user.impl;
 import com.github.pagehelper.PageHelper;
 import com.winter.mapper.UserMapper;
 import com.winter.model.User;
-import com.winter.service.user.UserService;
+import com.winter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int addUser(User user) {
-
         return userMapper.insertSelective(user);
     }
 

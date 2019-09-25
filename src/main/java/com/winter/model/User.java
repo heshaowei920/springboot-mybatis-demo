@@ -1,28 +1,43 @@
 package com.winter.model;
 
-public class User {
-    private Integer userid;
+import java.io.Serializable;
 
-    private String username;
+public class User implements Serializable {
+
+    private Integer userId;
+
+    private String userName;
 
     private String password;
 
     private String phone;
 
-    public Integer getUserid() {
-        return userid;
+    public User(){};
+
+    public User(String userName, String password, String phone) {
+        this.userName = userName;
+        this.password = password;
+        this.phone = phone;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public User(String userName) {
+        this.userName = userName;
     }
 
-    public String getUsername() {
-        return username;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
