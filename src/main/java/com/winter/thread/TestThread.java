@@ -33,22 +33,26 @@ public class TestThread {
                         e.printStackTrace();
                     }
                 }
-                countDownLatch.countDown();
+                System.out.println(Thread.currentThread().getName() + ", shutdown is : " + currentIndex);
+                countDownLatch.countDown();//发送执行完毕通知
             });
         }
+
 
         System.out.println("全部提交完毕");
 
         try {
             System.out.println("准备等待线程池任务执行完毕");
-            countDownLatch.await();
+            countDownLatch.await();//等待所有线程执行完毕
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         System.out.println("全部线程执行完毕");
+        threadPoolExecutor.shutdown();
     }
 
     public static void main(String[] args) throws Exception{
+
 
         for (int i = 0; i < 100; i++) {
             // 将指定元素添加到此队列中，如果没有可用空间，将一直等待（如果有必要）。
@@ -56,8 +60,15 @@ public class TestThread {
             System.out.println("向阻塞队列中添加了元素:" + i);
 
         }
-
         createThreadPoolExecutor();
+
+        ExecutorService executorService=Executors.newFixedThreadPool(2);
+        CallableThread callableThread=new CallableThread();
+        System.out.println("===========开始执行===========");
+        Future<String> future=executorService.submit(callableThread);
+        System.out.println("============等待结果===============");
+        System.out.println(future.get());
+        executorService.shutdown();
 
     }
 }

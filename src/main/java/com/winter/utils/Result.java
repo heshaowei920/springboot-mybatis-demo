@@ -9,35 +9,35 @@ package com.winter.utils;
  */
 public class Result {
 
-    private Integer resultCode;
+    private Integer code;
     private String message;
     private Object data;
 
     public Result success(Object data) {
-        this.resultCode = 200;
+        this.code = 200;
         this.data = data;
         this.message = "请求成功";
         return this;
     }
 
     public Result success() {
-        this.resultCode = 200;
+        this.code = 200;
         this.message = "请求成功";
         return this;
     }
 
     public Result fail(ResultEnum resultEnum) {
-        this.resultCode = resultEnum.getValue();
+        this.code = resultEnum.getValue();
         this.message = resultEnum.getMsg();
         return this;
     }
 
-    public Integer getResultCode() {
-        return resultCode;
+    public Integer getCode() {
+        return code;
     }
 
-    public void setResultCode(Integer resultCode) {
-        this.resultCode = resultCode;
+    public void setCode(Integer code) {
+        this.code = code;
     }
 
     public String getMessage() {

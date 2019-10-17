@@ -40,6 +40,12 @@ public class UserController {
         return result.success(user.getUserId());
     }
 
+    public <T> void doTest(List<T> list){
+        for (Object userId:list){
+            System.out.println(userId.toString());
+        }
+    }
+
 
     @RequestMapping(value = "/all/{pageNum}/{pageSize}")
     public Result findAllUser(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) {
@@ -53,6 +59,14 @@ public class UserController {
     public Result login() {
         Result result = new Result();
         Integer userId = 1111;
+        List<Long> list=new ArrayList<>();
+        list.add(11111L);
+
+        List<String> list1=new ArrayList<>();
+        list1.add("222");
+        doTest(list);
+        doTest(list1);
+
         LoginToken loginToken = new LoginToken(userId, "123");
         String token = JwtUtil.sign(loginToken, 1000 * 60 * 3);
         redisUtil.set("token:" + userId, token, 60 * 3);

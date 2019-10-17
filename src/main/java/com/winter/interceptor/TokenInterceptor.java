@@ -42,7 +42,7 @@ public class TokenInterceptor implements HandlerInterceptor {
         response.setCharacterEncoding("utf-8");
         logger.info(url);
         if (url.contains("/login")) {
-            //return true;
+            return true;
         }
 
         String token = request.getHeader("token");
