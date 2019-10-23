@@ -7,16 +7,31 @@ package com.winter.thread;
  * @modified By：
  * @version: v1.0
  */
-public class Task implements Runnable{
+public class Task implements Runnable {
 
-    private int index;
+    private static int index = 100;
 
-    public Task(int index) {
-        this.index = index;
+    private int count;
+
+    public Task(int count) {
+        this.count = count;
     }
+
+    private Object obj = new Object();//对象锁只能有一个
 
     @Override
     public void run() {
-        System.out.println(index+"/////////////////////////////////");
+        while (true) {
+            synchronized (obj) {
+                if (index > 0) {
+                    try {
+                        Thread.sleep(100);
+                    } catch (Exception e) {
+                    }
+                    index--;
+                    System.out.println(Thread.currentThread().getName() + "线程-->" + index);
+                }
+            }
+        }
     }
 }

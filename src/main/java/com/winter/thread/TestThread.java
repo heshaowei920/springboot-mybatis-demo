@@ -1,6 +1,7 @@
 package com.winter.thread;
 
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author ：heshaowei
@@ -29,7 +30,7 @@ public class TestThread {
                     System.out.println(currentIndex + ":" + queue.poll());
                     try {
                         Thread.sleep(2000);
-                    }catch (InterruptedException e){
+                    } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
@@ -37,7 +38,6 @@ public class TestThread {
                 countDownLatch.countDown();//发送执行完毕通知
             });
         }
-
 
         System.out.println("全部提交完毕");
 
@@ -51,17 +51,18 @@ public class TestThread {
         threadPoolExecutor.shutdown();
     }
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
 
-
+        /*
         for (int i = 0; i < 100; i++) {
             // 将指定元素添加到此队列中，如果没有可用空间，将一直等待（如果有必要）。
             queue.put(i);
             System.out.println("向阻塞队列中添加了元素:" + i);
-
         }
         createThreadPoolExecutor();
+        */
 
+        /*
         ExecutorService executorService=Executors.newFixedThreadPool(2);
         CallableThread callableThread=new CallableThread();
         System.out.println("===========开始执行===========");
@@ -69,6 +70,15 @@ public class TestThread {
         System.out.println("============等待结果===============");
         System.out.println(future.get());
         executorService.shutdown();
+        */
 
+
+        Task task1 = new Task(1);
+        Thread thread = new Thread(task1);
+        Thread thread2 = new Thread(task1);
+        Thread thread3 = new Thread(task1);
+        thread.start();
+        thread2.start();
+        thread3.start();
     }
 }

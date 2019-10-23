@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  * @modified By：
  * @version:
  */
-public class RedissLockUtil {
+public class RedissonLockUtil {
 
     private static RedissonClient redissonClient;
 

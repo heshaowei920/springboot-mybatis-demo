@@ -1,7 +1,7 @@
 package com.winter.config;
 
 import com.auth0.jwt.internal.org.apache.commons.lang3.StringUtils;
-import com.winter.utils.RedissLockUtil;
+import com.winter.utils.RedissonLockUtil;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
@@ -45,10 +45,11 @@ public class RedissonAutoConfiguration {
 
     /**
      * 单机模式自动装配
+     *
      * @return
      */
     @Bean
-    @ConditionalOnProperty(name="redisson.address")
+    @ConditionalOnProperty(name = "redisson.address")
     RedissonClient redissonSingle() {
         Config config = new Config();
         SingleServerConfig serverConfig = config.useSingleServer()
@@ -56,7 +57,7 @@ public class RedissonAutoConfiguration {
                 .setTimeout(redssionProperties.getTimeout())
                 .setConnectionPoolSize(redssionProperties.getConnectionPoolSize())
                 .setConnectionMinimumIdleSize(redssionProperties.getConnectionMinimumIdleSize());
-        if(StringUtils.isNotBlank(redssionProperties.getPassword())) {
+        if (StringUtils.isNotBlank(redssionProperties.getPassword())) {
             serverConfig.setPassword(redssionProperties.getPassword());
         }
 
@@ -64,14 +65,15 @@ public class RedissonAutoConfiguration {
     }
 
     /**
-     * 装配locker类，并将实例注入到RedissLockUtil中
+     * 装配locker类，并将实例注入到RedissonLockUtil中
+     *
      * @return
      */
     @Bean
-    RedissLockUtil redissLockUtil(RedissonClient redissonClient) {
-        RedissLockUtil redissLockUtil = new RedissLockUtil();
-        redissLockUtil.setRedissonClient(redissonClient);
-        return redissLockUtil;
+    RedissonLockUtil redissonLockUtil(RedissonClient redissonClient) {
+        RedissonLockUtil redissonLockUtil = new RedissonLockUtil();
+        redissonLockUtil.setRedissonClient(redissonClient);
+        return redissonLockUtil;
     }
 
 }

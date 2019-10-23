@@ -6,13 +6,19 @@ import com.winter.model.User;
 import com.winter.service.UserService;
 import com.winter.utils.JwtUtil;
 import com.winter.utils.RedisUtil;
+import com.winter.utils.RedissonLockUtil;
 import com.winter.utils.Result;
+import org.redisson.api.RLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.*;
 
 
@@ -59,13 +65,10 @@ public class UserController {
     public Result login() {
         Result result = new Result();
         Integer userId = 1111;
-        List<Long> list=new ArrayList<>();
-        list.add(11111L);
 
-        List<String> list1=new ArrayList<>();
-        list1.add("222");
-        doTest(list);
-        doTest(list1);
+        String key="aaa";
+        boolean flag=RedissonLockUtil.tryLock(key,60,60);
+        logger.info("lock status is {}",flag);
 
         LoginToken loginToken = new LoginToken(userId, "123");
         String token = JwtUtil.sign(loginToken, 1000 * 60 * 3);
@@ -82,4 +85,37 @@ public class UserController {
         return result.success(loginToken);
     }
 
+
+    public static void readTxt(String filePath) {
+
+        try {
+            File file = new File(filePath);
+            if(file.isFile() && file.exists()) {
+                InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "utf-8");
+                BufferedReader br = new BufferedReader(isr);
+                String lineTxt = null;
+                int count=0;
+                while ((lineTxt = br.readLine()) != null) {
+                    if (lineTxt.contains("\"userId\":")){
+                        count++;
+                        int count1 = lineTxt.indexOf("\"userId\":");
+                        System.out.println(lineTxt.substring(count1,count1+18));
+                    }
+                }
+                System.out.println(count);
+                br.close();
+            } else {
+                System.out.println("文件不存在!");
+            }
+        } catch (Exception e) {
+            System.out.println("文件读取错误!");
+        }
+
+    }
+
+
+    public static void main(String[] args) {
+        String filePath = "E:\\cglive-api.log";
+        readTxt(filePath);
+    }
 }
