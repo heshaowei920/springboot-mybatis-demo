@@ -63,7 +63,7 @@ public class DateUtil {
         // getTwoDay("2008-12-1", "2008-9-29"));
 
 //    System.out.println(getNowTimeStampTime().getTime());
-        System.out.println(getLongAgoYear());
+        System.out.println(getTwoDay("2019-12-28","2020-1-13"));
 
     }
 
