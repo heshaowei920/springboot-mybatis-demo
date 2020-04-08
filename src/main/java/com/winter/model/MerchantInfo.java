@@ -33,8 +33,6 @@ public class MerchantInfo {
 
     private Date createTime;
 
-    private String userAccount;
-
     private Integer status;
 
     private Date updateTime;
@@ -51,8 +49,6 @@ public class MerchantInfo {
 
     private String area;
 
-    private Integer groupFlag;
-
     private Integer checkStatus;
 
     private Integer closeStatus;
@@ -60,6 +56,8 @@ public class MerchantInfo {
     private Date checkTime;
 
     private Date closeTime;
+
+    private Double distance;//距离 单位米
 
     public Integer getId() {
         return id;
@@ -141,14 +139,6 @@ public class MerchantInfo {
         this.createTime = createTime;
     }
 
-    public String getUserAccount() {
-        return userAccount;
-    }
-
-    public void setUserAccount(String userAccount) {
-        this.userAccount = userAccount;
-    }
-
     public Integer getStatus() {
         return status;
     }
@@ -213,14 +203,6 @@ public class MerchantInfo {
         this.area = area;
     }
 
-    public Integer getGroupFlag() {
-        return groupFlag;
-    }
-
-    public void setGroupFlag(Integer groupFlag) {
-        this.groupFlag = groupFlag;
-    }
-
     public Integer getCheckStatus() {
         return checkStatus;
     }
@@ -251,5 +233,13 @@ public class MerchantInfo {
 
     public void setCloseTime(Date closeTime) {
         this.closeTime = closeTime;
+    }
+
+    public Double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Double distance) {
+        this.distance = distance;
     }
 }

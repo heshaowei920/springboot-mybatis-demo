@@ -44,7 +44,10 @@ public class TokenInterceptor implements HandlerInterceptor {
         if (url.contains("/login")) {
             return true;
         }
+        //todo:先不做验证token
+        return true;
 
+        /*
         String token = request.getHeader("token");
         if (token == null) {
             responseMessage(response, response.getWriter(), result);
@@ -68,7 +71,7 @@ public class TokenInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        return false;
+        return false;*/
     }
 
     @Override
